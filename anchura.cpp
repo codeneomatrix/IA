@@ -59,7 +59,7 @@ int matrix[39][39] ={{0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
  	char va[107];
  	int valor;
  	int ini=0;
- 	int fin=10;
+ 	int fin=38;
  	
  	printf("\n\n\t\tCiudad inicial: salinacruz\n");
  	printf("\t\tCiudad destino: oaxaca\n\n\n\n");
@@ -73,10 +73,10 @@ int matrix[39][39] ={{0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     while(valor!=fin){
 	  
 		s= obtenercadena(&n);
-		for(int i=0; s[i]!='?'; i++){
+		for(int i=0; s[i]!='!'; i++){
 			va[i]=s[i];
 		}
-   		free(s);
+   		//free(s);
 		for(int j=0;j<39;j++){
 			if(matrix[valor][j]!= 0){
 				agregar(&n,j,va);
@@ -86,43 +86,131 @@ int matrix[39][39] ={{0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
  		eliminar(&n);
  		valor = obtener(&n);
         
-        imprimir(n);
+      // imprimir(n);
     }
  	//imprimir(n);
     s= obtenercadena(&n);
     
-	 for(int i=0; s[i]!='?'; i++){
+	 for(int i=0; s[i]!='!'; i++){
 		  printf("%c", s[i]);
-		  if(s[i]=='8'){
+		  if(s[i]=='7'){
 		  	printf("OAXACA");
 		  }
-		  else if(s[i]=='7'){
+		  else if(s[i]=='6'){
 		  	printf("ixtaltepec");
 		  }
-		  else if(s[i]=='6'){
+		  else if(s[i]=='5'){
 		  	printf("ixtepec");
 		  }	
-		  else if(s[i]=='5'){
+		  else if(s[i]=='4'){
 		  	printf("juchitan");
 		  }
-		  else if(s[i]=='4'){
+		  else if(s[i]=='3'){
 		  	printf("tehuantepec");
 		  }		
-		  else if(s[i]=='3'){
+		  else if(s[i]=='2'){
 		  	printf("puertoescondido");
 		  }		
-		  else if(s[i]=='2'){
+		  else if(s[i]=='1'){
 		  	printf("huatulco");
 		  }
-		  else if(s[i]=='1'){
+		  else if(s[i]=='0'){
 		  	printf("salinacruz");
 		  }
-		  else if(s[i]=='9'){
+		  else if(s[i]=='8'){
 		  	printf("puebla");
 		  }
-		  else if(s[i]==':'){
+		  else if(s[i]=='9'){
 		  	printf("cd mexico");
-		  }else{
+		  }
+		  else if(s[i]==':'){
+		  	printf("orizaba");
+		  }
+		  else if(s[i]==';'){
+		  	printf("cordoba");
+		  }
+		  else if(s[i]=='<'){
+		  	printf("veracruz");
+		  }
+		  else if(s[i]=='='){
+		  	printf("acayucan");
+		  }
+		  else if(s[i]=='>'){
+		  	printf("minatitlan");
+		  }
+		  else if(s[i]=='?'){
+		  	printf("coatzacoalcos");
+		  }
+		  else if(s[i]=='@'){
+		  	printf("cardenas");
+		  }
+		  else if(s[i]=='A'){
+		  	printf("villahermosa");
+		  }
+		  else if(s[i]=='B'){
+		  	printf("cd carmen");
+		  }
+		  else if(s[i]=='C'){
+		  	printf("campeche");
+		  }
+		  else if(s[i]=='D'){
+		  	printf("merida");
+		  }
+		  else if(s[i]=='E'){
+		  	printf("cancun");
+		  }
+		  else if(s[i]=='F'){
+		  	printf("playa del carmen");
+		  }
+		  else if(s[i]=='G'){
+		  	printf("chetumal");
+		  }
+		  else if(s[i]=='H'){
+		  	printf("palenque");
+		  }else if(s[i]=='I'){
+		  	printf("ocosingo");
+		  }
+		  else if(s[i]=='J'){
+		  	printf("san cristobal");
+		  }
+		  else if(s[i]=='K'){
+		  	printf("comitan");
+		  }
+		  else if(s[i]=='L'){
+		  	printf("tuxtla");
+		  }
+		  else if(s[i]=='M'){
+		  	printf("tonala");
+		  }
+		  else if(s[i]=='N'){
+		  	printf("pigiliapan");
+		  }
+		  else if(s[i]=='O'){
+		  	printf("huixtla");
+		  }
+		  else if(s[i]=='P'){
+		  	printf("tapachula");
+		  }
+		  else if(s[i]=='Q'){
+		  	printf("jalapa");
+		  }
+		  else if(s[i]=='R'){
+		  	printf("pozarica");
+		  }
+		  else if(s[i]=='S'){
+		  	printf("tuxpan");
+		  }
+		  else if(s[i]=='T'){
+		  	printf("tampico");
+		  }
+		  else if(s[i]=='U'){
+		  	printf("matamoros");
+		  }
+		  else if(s[i]=='V'){
+		  	printf("reynosa");
+		  }
+		  
+		  else{
 		  	printf("-");
 		  }
 		  	

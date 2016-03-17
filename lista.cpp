@@ -44,9 +44,9 @@ void agregar(struct tcola **cola, int elem, char en[]){
 		poo=i;
 	}
 	
-	nuevo->sim[poo+1]=(char)elem+49;
+	nuevo->sim[poo+1]=(char)elem+48;
 	nuevo->sim[poo+2]='-';
-	nuevo->sim[poo+3]='?';
+	nuevo->sim[poo+3]='!';
 	
   if (*cola == NULL)
     nuevo->sig = nuevo;
