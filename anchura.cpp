@@ -59,7 +59,7 @@ int matrix[39][39] ={{0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
  	char va[107];
  	int valor;
  	int ini=0;
- 	int fin=7;
+ 	int fin=10;
  	
  	printf("\n\n\t\tCiudad inicial: salinacruz\n");
  	printf("\t\tCiudad destino: oaxaca\n\n\n\n");
@@ -71,12 +71,12 @@ int matrix[39][39] ={{0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     valor = obtener(&n);
     
     while(valor!=fin){
-	
+	  
 		s= obtenercadena(&n);
 		for(int i=0; s[i]!='?'; i++){
 			va[i]=s[i];
 		}
-   
+   		free(s);
 		for(int j=0;j<39;j++){
 			if(matrix[valor][j]!= 0){
 				agregar(&n,j,va);
@@ -85,16 +85,48 @@ int matrix[39][39] ={{0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
  	 
  		eliminar(&n);
  		valor = obtener(&n);
-
+        
+        imprimir(n);
     }
- 	
+ 	//imprimir(n);
     s= obtenercadena(&n);
     
 	 for(int i=0; s[i]!='?'; i++){
 		  printf("%c", s[i]);
 		  if(s[i]=='8'){
 		  	printf("OAXACA");
+		  }
+		  else if(s[i]=='7'){
+		  	printf("ixtaltepec");
+		  }
+		  else if(s[i]=='6'){
+		  	printf("ixtepec");
 		  }	
+		  else if(s[i]=='5'){
+		  	printf("juchitan");
+		  }
+		  else if(s[i]=='4'){
+		  	printf("tehuantepec");
+		  }		
+		  else if(s[i]=='3'){
+		  	printf("puertoescondido");
+		  }		
+		  else if(s[i]=='2'){
+		  	printf("huatulco");
+		  }
+		  else if(s[i]=='1'){
+		  	printf("salinacruz");
+		  }
+		  else if(s[i]=='9'){
+		  	printf("puebla");
+		  }
+		  else if(s[i]==':'){
+		  	printf("cd mexico");
+		  }else{
+		  	printf("-");
+		  }
+		  	
+		  
 	}
 	    
  	return 0;
