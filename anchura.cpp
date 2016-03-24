@@ -66,7 +66,8 @@ int matrix[39][39] ={{0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
  	printf("\t\t\t\t CALCULANDO... \n\n\t\t\t\t\n");
  	
  	tcola *n = NULL;
-    agregar(&n, 0," ");
+ 	char y[1]={' '};
+    agregar(&n, ini,y);
 	
     valor = obtener(&n);
     

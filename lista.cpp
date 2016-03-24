@@ -79,7 +79,7 @@ int elem=0;
 
 void imprimir(struct tcola *n) {
     if (n == NULL) {
-        printf("lista esta vacía\n");
+        printf("lista esta vacia\n");
     }
     for (int i=0; i<max;i++) {
         n = n->sig;
