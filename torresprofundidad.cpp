@@ -7,175 +7,186 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+
 #include "torrespila.cpp"
+#include "pila.cpp"
 
+int final = 2;
+int pt = 21;
 
-int inicio =0;
-int final = 10;
-int ver=0;
-int pt=4; //14 para rutas largas
+int agujadestino = 2;
 
-int matrix[39][39] ={{0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0},
-{0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0}};
+Pilat ph = NULL;
 
-Pila pila = NULL;
-
-bool busqueda(int ciudad,int profundidad){
-	//printf("-------------------busqueda--[profundidad %d\n",profundidad);
-	if(profundidad<pt){
-
-		for(int j=0;j<39;j++){
-			if(matrix[ciudad][j]!= 0){
-				if(ver==1){
-					printf("[%d]{%d}  ", j,profundidad+1);
-				}
-				Push(&pila, j);
-				if(j==final){
-					if(ver==1){
-						printf("\n \t·\t [[%d]]- ", j);
-				    }
-					return true;
-				}else{
-					if(busqueda(j,profundidad+1)){
-						//printf(" [[%d]] ",j );
-						return true;
-					}
-				}
-
-			}
-		}
-	}
-
-	Pop(&pila);
-
-if(ver==1){
-	if(profundidad!=pt){
-		//printf("⇙ {%d}",profundidad-1);
-		printf("∎");
-	}
-	printf("\n");
-	for (int i = 0; i < profundidad-1; ++i){
-		printf("        ");
-	}
-}
- 	return false;
- }
-
-
-
-
-
-void saberciudad(int s){
-		       if(s==7) printf("OAXACA");
-		  else if(s==6) printf("ixtaltepec");
-		  else if(s==5) printf("ixtepec");
-		  else if(s==4)printf("juchitan");
-		  else if(s==3)printf("tehuantepec");
-		  else if(s==2)printf("puertoescondido");
-		  else if(s==1)printf("huatulco");
-		  else if(s==0)printf("salinacruz");
-		  else if(s==8)printf("puebla");
-		  else if(s==9)printf("cd mexico");
-		  else if(s==10)printf("orizaba");
-		  else if(s==11)printf("cordoba");
-		  else if(s==12)printf("veracruz");
-		  else if(s==13)printf("acayucan");
-		  else if(s==14)printf("minatitlan");
-		  else if(s==15)printf("coatzacoalcos");
-		  else if(s==16)printf("cardenas");
-		  else if(s==17)printf("villahermosa");
-		  else if(s==18)printf("cd carmen");
-		  else if(s==19)printf("campeche");
-		  else if(s==20)printf("merida");
-		  else if(s==21)printf("cancun");
-		  else if(s==22)printf("playa del carmen");
-		  else if(s==23)printf("chetumal");
-		  else if(s==24)printf("palenque");
-		  else if(s==25)printf("ocosingo");
-		  else if(s==26)printf("san cristobal");
-		  else if(s==27)printf("comitan");
-		  else if(s==28)printf("tuxtla");
-		  else if(s==29)printf("tonala");
-		  else if(s==30)printf("pigiliapan");
-		  else if(s==31)printf("huixtla");
-		  else if(s==32)printf("tapachula");
-		  else if(s==33)printf("jalapa");
-		  else if(s==34)printf("pozarica");
-		  else if(s==35)printf("tuxpan");
-		  else if(s==36)printf("tampico");
-		  else if(s==37)printf("matamoros");
-		  else if(s==38)printf("reynosa");
+void sabermovimiento(int vd, int co, int cd) {
+  printf("disco: %d | torre %d ==> torre %d \n", vd, co, cd);
 }
 
+int proximo(int v, int i) {
+  v += i;
+  if (v >= 3) {
+    v -= 3;
+  }
+  if (v >= 3) {
+    v -= 3;
+  }
+  if (v >= 3) {
+    v -= 3;
+  }
+  return v;
+}
 
- int  main(){
- 	printf("\n\n\t\tCiudad inicial: ");
- 	saberciudad(inicio);
- 	printf("\n\t\tCiudad destino: ");
- 	saberciudad(final);
- 	printf("\n\n\n\n\t\t\t\t CALCULANDO...\n ");
+void imprimirmatrix(int matrix[3][9]) {
+  printf("\t\t\t\t<%d>\t<%d>\t<%d>\n", matrix[0][8], matrix[1][8],
+         matrix[2][8]);
+  for (int j = 7; j >= 0; j--) {
+    printf("\t\t\t\t");
+    for (int i = 0; i < 3; i++) {
+      if (matrix[i][j] != 10) {
+        printf("[%d]\t", matrix[i][j]);
+      } else {
+        printf("\t");
+      }
+    }
+    printf("\n");
+  }
+  printf("\t\t--------------------------------------------------\n");
+}
 
- 	Push(&pila, inicio);
+bool busqueda(int profundidad) {
+  if (profundidad < pt) {
+    // printf(
+    //  "-------------------ingresando a nueva busqueda--[profundidad >> %d\n",
+    //  profundidad);
 
- 	busqueda(inicio,0);
+    for (int p = 0; p < 3; p++) {
+      for (int j = 1; j < 2; j++) {
+        int pd = proximo(p, j);
 
- 	printf("\n\t");
+        if (nivelpila(&ph, p) > -1 && p != pd) {
+          int matrixtem[3][9];
 
- 	int vt =cantidad();
- 	if(vt>0){
- 		int ciu[vt];
- 	for(int i=(vt-1); i>=0; i--){
- 		ciu[i]=Pop(&pila);
- 	}
+          int *to = datostorre(&ph, 0);
+          for (int i = 0; i < 8; i++) {
+            matrixtem[0][i] = to[i];
+          }
 
- 	for(int i=0; i<vt; i++){
- 		saberciudad(ciu[i]);
- 		printf(" ⇛ ");
- 	}
- }else{
- 	printf("PROFUNDIDAD INSUFICIENTE\n");
- }
+          matrixtem[0][8] = nivelpila(&ph, 0);
 
- 	printf("\n\n");
+          to = datostorre(&ph, 1);
+          for (int i = 0; i < 8; i++) {
+            matrixtem[1][i] = to[i];
+          }
+          matrixtem[1][8] = nivelpila(&ph, 1);
 
- 	return 0;
- }
+          to = datostorre(&ph, 2);
+          for (int i = 0; i < 8; i++) {
+            matrixtem[2][i] = to[i];
+          }
+          matrixtem[2][8] = nivelpila(&ph, 2);
+
+          int vdo;
+
+          if (matrixtem[p][8] >= 0) {
+            vdo = matrixtem[p][matrixtem[p][8]];
+          } else {
+            vdo = 10;
+          }
+
+          int vdd;
+
+          if (matrixtem[pd][8] >= 0) {
+            vdd = matrixtem[pd][matrixtem[pd][8]];
+          } else {
+            vdd = 10;
+          }
+
+          if (vdo < vdd && vdo != 10) {
+            // printf("\t\t\t\t\t {%d,%d}\n", p, pd);
+            // printf("--[>%d ",profundidad );
+            // sabermovimiento(matrixtem[p][matrixtem[p][8]], p, pd);
+
+            matrixtem[pd][8] += 1;
+
+            matrixtem[pd][matrixtem[pd][8]] = matrixtem[p][matrixtem[p][8]];
+            matrixtem[p][matrixtem[p][8]] = 10;
+            matrixtem[p][8] -= 1;
+
+            // imprimirmatrix(matrixtem);
+          }
+
+          int a1[8];
+          for (int i = 0; i < 8; i++) {
+            a1[i] = matrixtem[0][i];
+          }
+          int a2[8];
+          for (int i = 0; i < 8; i++) {
+            a2[i] = matrixtem[1][i];
+          }
+          int a3[8];
+          for (int i = 0; i < 8; i++) {
+            a3[i] = matrixtem[2][i];
+          }
+
+          Push(&ph, a1, a2, a3, matrixtem[0][8], matrixtem[1][8],
+               matrixtem[2][8]);
+
+          if (nivelpila(&ph, agujadestino) == final) {
+            printf("\nENCONTRADO!!\n");
+            return true;
+          } else {
+            if (busqueda(profundidad + 1)) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+  }
+  // printf("regresando!!!!!!!!!!!!!!\n");
+  Pop(&ph);
+  return false;
+}
+
+int main() {
+
+  int aguja1[] = {8, 7, 6, 5, 4, 3, 2, 1};
+  int agujar[] = {10, 10, 10, 10, 10, 10, 10, 10};
+
+  printf("\n\n\n\n\t\t\t\t CALCULANDO...\n ");
+
+  Push(&ph, aguja1, agujar, agujar, 7, -1, -1);
+
+  busqueda(0);
+
+  //------------------------------------------------
+  int matrixtem[3][9];
+
+  while (((nivelpila(&ph, 0) != -1) || (nivelpila(&ph, 1) != -1)) ||
+         nivelpila(&ph, 2) != -1) {
+    int *to = datostorre(&ph, 0);
+    for (int i = 0; i < 8; i++) {
+      matrixtem[0][i] = to[i];
+    }
+
+    matrixtem[0][8] = nivelpila(&ph, 0);
+
+    to = datostorre(&ph, 1);
+    for (int i = 0; i < 8; i++) {
+      matrixtem[1][i] = to[i];
+    }
+    matrixtem[1][8] = nivelpila(&ph, 1);
+
+    to = datostorre(&ph, 2);
+    for (int i = 0; i < 8; i++) {
+      matrixtem[2][i] = to[i];
+    }
+    matrixtem[2][8] = nivelpila(&ph, 2);
+
+    imprimirmatrix(matrixtem);
+    Pop(&ph);
+    printf("\n");
+  }
+
+  return 0;
+}
