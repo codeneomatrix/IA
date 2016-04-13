@@ -1,53 +1,94 @@
-#include <stdio.h>   
-#include <stdlib.h>  
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-struct tcola{
-  int data;
-  char sim[107];
+struct tcola {
+  int torrea[3];
+  int torreb[3];
+  int torrec[3];
+  int na;
+  int nb;
+  int nc;
+  int todos[280];
   struct tcola *sig;
 };
 
-int max=0;
+int max = 0;
 
-int obtener(struct tcola **c1){
-	int elem=0;
-	elem = (*c1)->sig->data;
-	//printf("%d ", elem);
-	return elem;
+int obtenera(struct tcola **c1) { return (*c1)->sig->na; }
+int obtenerb(struct tcola **c1) { return (*c1)->sig->nb; }
+int obtenerc(struct tcola **c1) { return (*c1)->sig->nc; }
+
+int nivel(struct tcola **c1, int p) {
+  if (p == 0)
+    return (*c1)->sig->na;
+  if (p == 1)
+    return (*c1)->sig->nb;
+  if (p == 2)
+    return (*c1)->sig->nc;
+  return (*c1)->sig->nc;
 }
 
-char* obtenercadena(struct tcola **c1){
-	char * a = (char *) malloc(107 * sizeof(int));
-	for(int j=0;j<107;j++){
- 			a[j]=' ';
- 	}
- 		for(int i=0; (*c1)->sig->sim[i]!='\0'; i++){
-		  //printf("%c", (*c1)->sig->sim[i]);
-			a[i]=(*c1)->sig->sim[i];	
-	    }
-	
- 		return a;
-	
+int *obtenerta(struct tcola **c1) { return (*c1)->sig->torrea; }
+int *obtenertb(struct tcola **c1) { return (*c1)->sig->torreb; }
+int *obtenertc(struct tcola **c1) { return (*c1)->sig->torrec; }
+
+int * datostorre(struct tcola **c1, int t) {
+  if (t == 0)
+    return (*c1)->sig->torrea;
+  if (t == 1)
+    return (*c1)->sig->torreb;
+  if (t == 2)
+    return (*c1)->sig->torrec;
+  return (*c1)->sig->torrec;
 }
 
-void agregar(struct tcola **cola, int elem, char en[]){
+int *obteneranteriores(struct tcola **c1) { return (*c1)->sig->todos; }
+
+void agregar(struct tcola **cola, int da[], int db[], int dc[], int a, int b,
+             int c, int en[]) {
   struct tcola *nuevo;
-  
-  nuevo = (struct tcola *) malloc(sizeof(struct tcola));
-  nuevo->data = elem;
-  int poo=0;
-  
-  
-  for(int i=0; en[i]!='\0'; i++){
-		nuevo->sim[i]=en[i];
-		poo=i;
-	}
-	
-	nuevo->sim[poo+1]=(char)elem+48;
-	nuevo->sim[poo+2]='-';
-	nuevo->sim[poo+3]='!';
-	
+
+  nuevo = (struct tcola *)malloc(sizeof(struct tcola));
+
+  nuevo->na = a;
+  nuevo->nb = b;
+  nuevo->nc = c;
+
+  for (int i = 0; i < 3; i++) {
+    nuevo->torrea[i] = da[i];
+  }
+  for (int i = 0; i < 3; i++) {
+    nuevo->torreb[i] = db[i];
+  }
+  for (int i = 0; i < 3; i++) {
+    nuevo->torrec[i] = dc[i];
+  }
+
+  for (int i = 0; i < 280; i++) {
+    nuevo->todos[i] = 40;
+  }
+
+  int in = 0;
+  for (int i = 0; en[i] < 20; i++) {
+    nuevo->todos[i] = en[i];
+    in++;
+  }
+
+  for (int i = 0; i < 3; i++) {
+    nuevo->todos[in++] = da[i];
+  }
+  nuevo->todos[in++] = a;
+  for (int i = 0; i < 3; i++) {
+    nuevo->todos[in++] = db[i];
+  }
+  nuevo->todos[in++] = b;
+  for (int i = 0; i < 3; i++) {
+    nuevo->todos[in++] = dc[i];
+  }
+  nuevo->todos[in++] = c;
+  nuevo->todos[in++] = 20;
+
   if (*cola == NULL)
     nuevo->sig = nuevo;
   else {
@@ -58,62 +99,16 @@ void agregar(struct tcola **cola, int elem, char en[]){
   max++;
 }
 
-void eliminar(struct tcola **c1){
-int elem=0;
+void eliminar(struct tcola **c1) {
+  int elem = 0;
   struct tcola *aux;
-
-  elem = (*c1)->sig->data;
   if ((*c1) == (*c1)->sig) {
     free(*c1);
     *c1 = NULL;
-  }
-  else {
+  } else {
     aux = (*c1)->sig;
     (*c1)->sig = aux->sig;
     free(aux);
   }
   max--;
 }
-
-
-
-void imprimir(struct tcola *n) {
-    if (n == NULL) {
-        printf("lista esta vacia\n");
-    }
-    for (int i=0; i<max;i++) {
-        n = n->sig;
-        printf("%d ", n->data);
-
-    }
-    printf("\n");
-}
-/* 
-int main(void) {
-    tcola *n = NULL;
-
-    agregar(&n, 0); 
-    agregar(&n, 1); 
-    agregar(&n, 2); 
-    agregar(&n, 3); 
-    agregar(&n, 4); 
-    agregar(&n, 5);
-    imprimir(n);
-    eliminar(&n);
-    imprimir(n);
-    eliminar(&n);
-    imprimir(n);
-    eliminar(&n);
-    imprimir(n);
-    eliminar(&n);
-    imprimir(n);
-    eliminar(&n);
-    imprimir(n);
-    eliminar(&n);
-    imprimir(n);
-    
-
-    return 0;
-}
-
-*/

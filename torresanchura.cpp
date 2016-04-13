@@ -5,218 +5,153 @@
   Date: 07/04/16
   Description:
 */
-
+#define ndiscos 3
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include <string.h>
 #include "torreslista.cpp"
 
-int matrix[39][39] ={{0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0},
-{0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0}};
+int discos = ndiscos;
+int fin = ndiscos - 1;
+int valor;
 
+int proximo(int v, int i) {
+  v += i;
+  if (v >= 3) {
+    v -= 3;
+  }
+  if (v >= 3) {
+    v -= 3;
+  }
+  if (v >= 3) {
+    v -= 3;
+  }
+  return v;
+}
 
-
- int  main(){
- 	char* s;
- 	char va[107];
- 	int valor;
- 	int ini=0;
- 	int fin=38;
-
- 	printf("\n\n\t\tCiudad inicial: salinacruz\n");
- 	printf("\t\tCiudad destino: oaxaca\n\n\n\n");
- 	printf("\t\t\t\t CALCULANDO... \n\n\t\t\t\t\n");
-
- 	tcola *n = NULL;
- 	char y[1]={' '};
-    agregar(&n, ini,y);
-
-    valor = obtener(&n);
-
-    while(valor!=fin){
-
-		s= obtenercadena(&n);
-		for(int i=0; s[i]!='!'; i++){
-			va[i]=s[i];
-		}
-   		//free(s);
-		for(int j=0;j<39;j++){
-			if(matrix[valor][j]!= 0){
-				agregar(&n,j,va);
-			}
- 		}
-
- 		eliminar(&n);
- 		valor = obtener(&n);
-
-      // imprimir(n);
+void imprimir(int s[]) {
+  for (int i = 0; s[i] < 20; i++) {
+    if (i % 12 == 0)
+      printf("----------------\n");
+    if ((i + 1) % 4 == 0) {
+      printf(" <%d> \n", s[i]+1);
+    } else {
+      (s[i] == 10) ? printf("   ") : printf("[%d]", s[i]);
     }
- 	//imprimir(n);
-    s= obtenercadena(&n);
+  }
+}
 
-	 for(int i=0; s[i]!='!'; i++){
-		  printf("%c", s[i]);
-		  if(s[i]=='7'){
-		  	printf("OAXACA");
-		  }
-		  else if(s[i]=='6'){
-		  	printf("ixtaltepec");
-		  }
-		  else if(s[i]=='5'){
-		  	printf("ixtepec");
-		  }
-		  else if(s[i]=='4'){
-		  	printf("juchitan");
-		  }
-		  else if(s[i]=='3'){
-		  	printf("tehuantepec");
-		  }
-		  else if(s[i]=='2'){
-		  	printf("puertoescondido");
-		  }
-		  else if(s[i]=='1'){
-		  	printf("huatulco");
-		  }
-		  else if(s[i]=='0'){
-		  	printf("salinacruz");
-		  }
-		  else if(s[i]=='8'){
-		  	printf("puebla");
-		  }
-		  else if(s[i]=='9'){
-		  	printf("cd mexico");
-		  }
-		  else if(s[i]==':'){
-		  	printf("orizaba");
-		  }
-		  else if(s[i]==';'){
-		  	printf("cordoba");
-		  }
-		  else if(s[i]=='<'){
-		  	printf("veracruz");
-		  }
-		  else if(s[i]=='='){
-		  	printf("acayucan");
-		  }
-		  else if(s[i]=='>'){
-		  	printf("minatitlan");
-		  }
-		  else if(s[i]=='?'){
-		  	printf("coatzacoalcos");
-		  }
-		  else if(s[i]=='@'){
-		  	printf("cardenas");
-		  }
-		  else if(s[i]=='A'){
-		  	printf("villahermosa");
-		  }
-		  else if(s[i]=='B'){
-		  	printf("cd carmen");
-		  }
-		  else if(s[i]=='C'){
-		  	printf("campeche");
-		  }
-		  else if(s[i]=='D'){
-		  	printf("merida");
-		  }
-		  else if(s[i]=='E'){
-		  	printf("cancun");
-		  }
-		  else if(s[i]=='F'){
-		  	printf("playa del carmen");
-		  }
-		  else if(s[i]=='G'){
-		  	printf("chetumal");
-		  }
-		  else if(s[i]=='H'){
-		  	printf("palenque");
-		  }else if(s[i]=='I'){
-		  	printf("ocosingo");
-		  }
-		  else if(s[i]=='J'){
-		  	printf("san cristobal");
-		  }
-		  else if(s[i]=='K'){
-		  	printf("comitan");
-		  }
-		  else if(s[i]=='L'){
-		  	printf("tuxtla");
-		  }
-		  else if(s[i]=='M'){
-		  	printf("tonala");
-		  }
-		  else if(s[i]=='N'){
-		  	printf("pigiliapan");
-		  }
-		  else if(s[i]=='O'){
-		  	printf("huixtla");
-		  }
-		  else if(s[i]=='P'){
-		  	printf("tapachula");
-		  }
-		  else if(s[i]=='Q'){
-		  	printf("jalapa");
-		  }
-		  else if(s[i]=='R'){
-		  	printf("pozarica");
-		  }
-		  else if(s[i]=='S'){
-		  	printf("tuxpan");
-		  }
-		  else if(s[i]=='T'){
-		  	printf("tampico");
-		  }
-		  else if(s[i]=='U'){
-		  	printf("matamoros");
-		  }
-		  else if(s[i]=='V'){
-		  	printf("reynosa");
-		  }
+int main() {
 
-		  else{
-		  	printf("-");
-		  }
+  printf("\t\t\t\t CALCULANDO... \n\n\t\t\t\t\n");
+
+  tcola *n = NULL;
+  int y[1] = {20};
+
+  int aguja1[discos];
+  int agujar[discos];
+
+  for (int i = 0; i < discos; i++) {
+    aguja1[i] = discos - i;
+  }
+  for (int i = 0; i < discos; i++) {
+    agujar[i] = 10;
+  }
+
+  printf("\n\n\n\n\t\t\t\t CALCULANDO...\n ");
+
+  agregar(&n, aguja1, agujar, agujar, discos - 1, -1, -1, y);
+
+  valor = obtenerc(&n);
+
+  while (valor != fin) {
+    int *previos = obteneranteriores(&n);
+     //printf("datos previos\n");
+    for (int p = 0; p < 3; p++) {
+      for (int j = 1; j < 2; j++) {
+        int pd = proximo(p, j);
+//printf("combinacion\n");
+        if (nivel(&n, p) > -1 && p != pd) {
+          int matrixtem[3][discos + 1];
+
+          int *to = datostorre(&n, 0);
+          for (int i = 0; i < discos; i++) {
+            matrixtem[0][i] = to[i];
+          }
+
+          matrixtem[0][discos] = nivel(&n, 0);
+
+          to = datostorre(&n, 1);
+          for (int i = 0; i < discos; i++) {
+            matrixtem[1][i] = to[i];
+          }
+          matrixtem[1][discos] = nivel(&n, 1);
+
+          to = datostorre(&n, 2);
+          for (int i = 0; i < discos; i++) {
+            matrixtem[2][i] = to[i];
+          }
+          matrixtem[2][discos] = nivel(&n, 2);
+
+          //printf("matrix previa cargada\n");
+          int vdo;
+
+          if (matrixtem[p][discos] >= 0) {
+            vdo = matrixtem[p][matrixtem[p][discos]];
+          } else {
+            vdo = 10;
+          }
+
+          int vdd;
+
+          if (matrixtem[pd][discos] >= 0) {
+            vdd = matrixtem[pd][matrixtem[pd][discos]];
+          } else {
+            vdd = 10;
+          }
+          //printf("valores de los discos determinados\n");
+          if (vdo < vdd && vdo != 10) {
+            // //printf("\t\t\t\t\t {%d,%d}\n", p, pd);
+            // //printf("--[>%d ",profundidad );
+            // sabermovimiento(matrixtem[p][matrixtem[p][discos]], p, pd);
+
+            matrixtem[pd][discos] += 1;
+
+            matrixtem[pd][matrixtem[pd][discos]] =
+                matrixtem[p][matrixtem[p][discos]];
+            matrixtem[p][matrixtem[p][discos]] = 10;
+            matrixtem[p][discos] -= 1;
+
+            // imprimirmatrix(matrixtem);
+            //printf("transformacion realizada\n");
 
 
-	}
+          int a1[discos];
+          for (int i = 0; i < discos; i++) {
+            a1[i] = matrixtem[0][i];
+          }
+          int a2[discos];
+          for (int i = 0; i < discos; i++) {
+            a2[i] = matrixtem[1][i];
+          }
+          int a3[discos];
+          for (int i = 0; i < discos; i++) {
+            a3[i] = matrixtem[2][i];
+          }
+          //printf("agregando\n");
+          agregar(&n, a1, a2, a3, matrixtem[0][discos], matrixtem[1][discos],
+                  matrixtem[2][discos], previos);
+          }
+        }
+      }
+    }
 
- 	return 0;
- }
+    //-----------------------------------------------------------------------------
+    eliminar(&n);
+    valor = obtenerc(&n);
+  }
+
+  int *previos = obteneranteriores(&n);
+  imprimir(previos);
+
+  return 0;
+}
