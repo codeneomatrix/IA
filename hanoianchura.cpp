@@ -18,7 +18,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "listaestados.cpp"
+#include "colaestados.cpp"
 
 int discos = ndiscos;
 int todos_los_discos = ndiscos - 1;

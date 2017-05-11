@@ -129,7 +129,6 @@ void agregar(struct estado **cola, int discos_en_a[], int discos_en_b[], int dis
 // almacena el valor total de los nodos en la lista
 
 void eliminar(struct estado **c1) {
-  int elem = 0;
   struct estado *aux;
   if ((*c1) == (*c1)->sig) {
     free(*c1);
