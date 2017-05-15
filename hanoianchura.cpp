@@ -53,6 +53,7 @@ void imprimir(int s[]) {
     }
 
     if(separador_torres==discos) {
+      s[i]= s[i]+1; 
       printf("\n");
       separador_estados++;
     }
@@ -71,11 +72,18 @@ void imprimirdatos(int s[]) {
   while (s[i] < marca_de_fin) {
     printf("%d > ", s[i]); 
     i++;
-  } 
-    
+  }   
 }
 
+
 int main() {
+  FILE *ptrCf; //apuntado al archivo
+
+  if ((ptrCf = fopen("hanoidatos.txt","wb")) == NULL){
+    printf("ERROR el archivo no pudo abrirse\n");
+  }
+
+  //fscan(ptrCf,"%s",&dato)  // asi se lee una linea del archivo, es como leer de la terminal con scanf
 
   printf("\t\t\t\t CALCULANDO... \n\n\t\t\t\t\n");
 
@@ -211,9 +219,30 @@ int main() {
   }
 
   int *previos = obteneranteriores(&n);
-  //imprimir(previos);
+  
   imprimir(previos);
-  imprimirdatos(previos);
+  //imprimirdatos(previos);
 
+  //pasando el arreglo de enteros a un arreglo de strings para si escritura en archivo
+  char output[(numero_total_de_datos)];
+  
+  for (int i = 0 ; i < numero_total_de_datos ; i++){
+    if (previos[i]==disco_nulo){
+      output[i] = '_';
+    }else{
+      output[i] = previos[i] + '0';
+    }
+  }
+
+
+// escribiendo en archivo
+  int posision = 0;
+  while (previos[posision] < marca_de_fin) {
+    fwrite(&output[posision],sizeof(char),1, ptrCf); 
+    posision++;
+  }   
+
+  //rewind(ptrCf); //envia el cursor al principio del archivo, si es que leimos el archivo
+  fclose(ptrCf); // se cierra el archivo
   return 0;
 }
